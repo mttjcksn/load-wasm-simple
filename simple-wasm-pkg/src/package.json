@@ -1,0 +1,24 @@
+{
+  "name": "@mj/factorial-wasm",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "url": "https://github.com/doobedoo"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "emscripten",
+    "react",
+    "webpack"
+  ],
+  "author": "mttjcksn",
+  "license": "MIT",
+  "types": "./index.d.ts",
+  "devDependencies": {
+    "@types/es6-promise": "^3.3.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,82 @@
+{
+  "version": 2,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "description": "Sets build and install directory",
+      "hidden": true,
+      "binaryDir": ".build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "gen-ninja",
+      "description": "Sets generator to ninja for windows",
+      "hidden": true,
+      "generator": "Ninja"
+    },
+    {
+      "name": "base-emscripten",
+      "description": "Sets up Emscripten compiler",
+      "hidden": true,
+      "inherits": [
+        "base",
+        "gen-ninja"
+      ],
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{EMSCRIPTEN}/cmake/Modules/Platform/Emscripten.cmake"
+        }
+      },
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "hostOS": [
+            "Windows"
+          ],
+          "intelliSenseMode": "windows-clang-x86"
+        }
+      }
+    },
+    {
+      "name": "ems_wasm_debug",
+      "displayName": "ems wasm debug",
+      "inherits": [
+        "base-emscripten"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "ems_wasm_release",
+      "displayName": "ems wasm release",
+      "inherits": [
+        "base-emscripten"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+     }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ems_wasm_debug",
+      "displayName": "ems ems_wasm_debug",
+      "configurePreset": "ems_wasm_debug"
+    },
+    {
+      "name": "ems_wasm_release",
+      "displayName": "ems_wasm_release",
+      "configurePreset": "ems_wasm_release"
+    }
+  ],
+  "testPresets": [
+  ]
+}
